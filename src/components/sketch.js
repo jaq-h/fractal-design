@@ -21,7 +21,7 @@ import Tri from './Triangle.js';
     p.noLoop();
     console.log('setup');
    p.createCanvas(1920,1080);
-   p.frameRate(30);
+   p.frameRate(60);
    p.colorMode(p.RGB, 255)
    for(var i = 0; i< listSize-1; i++)
    {
@@ -44,13 +44,13 @@ import Tri from './Triangle.js';
     p.clear();
     p.background(200,0,255);
     p.translate(1920/2,1080/2);
-    count+=.5;
+    count+=.2;
 
     for(var i =0; i<triangles.length-2; i++) //draw resize and rotate
     { 
       triangles[i].drawTriangle();
       triangles[i].setSize(i);
-      p.rotate((i/1500)+count/1000);
+      p.rotate((i/1500)+count/1500);
   
     }
    

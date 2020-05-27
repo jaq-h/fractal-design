@@ -19,12 +19,13 @@ function App() {
   return (
     <div className="App">
       <P5Wrapper sketch={sketch} />
-      <Slider
+      {/* <Slider
        defaultValue={[0, 255]}
       valueLabelDisplay="auto"
       aria-labelledby="range-slider"
       marks={marks}
-     />
+      onChange={handleChange}
+     /> */}
 
     </div>
   );

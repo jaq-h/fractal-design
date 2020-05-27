@@ -28,7 +28,7 @@ class Tri {
 
     drawTriangle()
     {
-      this.p.fill([this.r,this.g,this.b, 155]);
+      this.p.fill([this.r,this.g,this.b, 100]);
       this.p.noStroke();
       let h = Math.sqrt(3)/2*this.w;
       this.p.triangle( (-1/2.0)*this.w,(-1/3.0)*h, (1/2.0)*this.w, (-1/3.0)*h, 0, (2/3.0)*h); 

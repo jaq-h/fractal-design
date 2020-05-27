@@ -42,7 +42,7 @@ import Tri from './Triangle.js';
 
   p.draw = () => {
     p.clear();
-    p.background(200,0,255);
+    p.background(255);
     p.translate(1920/2,1080/2);
     count+=.2;
 
@@ -50,7 +50,7 @@ import Tri from './Triangle.js';
     { 
       triangles[i].drawTriangle();
       triangles[i].setSize(i);
-      p.rotate((i/1500)+count/1500);
+      p.rotate((i/1500)+(count/1500));
   
     }
    
@@ -62,6 +62,8 @@ import Tri from './Triangle.js';
      triangles[triangles.length-2] = new Tri(p);
      triangles[triangles.length-2].setSize(triangles.length);
      triangles[triangles.length-2].setColor(p.random(colorRange['minR'],colorRange['maxR']),p.random(colorRange['minG'],colorRange['maxG']),p.random(colorRange['minB'],colorRange['maxB']));
+
+     p.rotate(count*-1.5);
     // p.background(100);
     // p.normalMaterial();
     // p.noStroke();

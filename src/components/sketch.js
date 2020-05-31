@@ -18,6 +18,7 @@ import Tri from './Triangle.js';
   };
 
   p.setup = ()  => {
+    alert("Warning this animation contains flashing colors which may not be suitable for photosensitive epilepsy. Click the animation to play/pause");
     p.noLoop();
     console.log('setup');
    p.createCanvas(1920,1080);

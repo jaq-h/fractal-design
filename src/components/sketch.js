@@ -45,7 +45,7 @@ import Tri from './Triangle.js';
     p.clear();
     p.background(255);
     p.translate(1920/2,1080/2);
-    count+=.2;
+    count-=.2;
 
     for(var i =0; i<triangles.length-2; i++) //draw resize and rotate
     { 

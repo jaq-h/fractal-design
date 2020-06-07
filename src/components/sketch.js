@@ -41,19 +41,19 @@ import Tri from './Triangle.js';
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
-    if (props.values){
-      twistSpeed = props.values.twistSpeed;
-      console.log(props.values);
-    }
-    if(!props.playing){
+    // if (props.values){
+    //   twistSpeed = props.values.twistSpeed;
+    //   console.log(props.values);
+    // }
+    if(props.playing === false){
       console.log('paused');
       p.noLoop();
       // p.textSize(32);
       //p.text('Click to resume!');
     }
-    else{
+    else if (props.playing === true){
       p.loop();
-      p.draw();
+      // p.draw();
       console.log('playing');
     
     }

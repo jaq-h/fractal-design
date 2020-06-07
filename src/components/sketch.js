@@ -4,7 +4,8 @@ import Tri from './Triangle.js';
  function sketch (p) {
   let playing = false;
   let triangles = [];
-  let listSize = 200;
+  let listSize = 500;
+  let twistSpeed = 0;
   let count =0;
   let opacity = 25;
   let rate = 1.0001;
@@ -18,10 +19,9 @@ import Tri from './Triangle.js';
   };
 
   p.setup = ()  => {
-    alert("Warning this animation contains flashing colors which may not be suitable for photosensitive epilepsy. Click the animation to play/pause");
-    p.noLoop();
+    
     console.log('setup');
-   p.createCanvas(1920,1080);
+   p.createCanvas(p.windowWidth*.9,p.windowHeight*.9);
    p.frameRate(60);
    p.colorMode(p.RGB, 255)
    for(var i = 0; i< listSize-1; i++)
@@ -32,20 +32,38 @@ import Tri from './Triangle.js';
      triangles.push(temp);
      
    }
+  //  p.noLoop();
+  //  alert("Warning this animation contains flashing colors which may not be suitable for photosensitive epilepsy. Click the animation to play/pause");
   };
 
-  // p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
-  //   if (props.colorRanges){
-  //     colorRange = props.colorRange;
-  //     console.log(props);
-  //   }
-  // };
+  p.windowResized = () =>  {
+    p.resizeCanvas(p.windowWidth*.9, p.windowHeight*.9);
+  }
+
+  p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
+    if (props.values){
+      twistSpeed = props.values.twistSpeed;
+      console.log(props.values);
+    }
+    if(!props.playing){
+      console.log('paused');
+      p.noLoop();
+      // p.textSize(32);
+      //p.text('Click to resume!');
+    }
+    else{
+      p.loop();
+      p.draw();
+      console.log('playing');
+    
+    }
+   };
 
   p.draw = () => {
     p.clear();
     p.background(255);
-    p.translate(1920/2,1080/2);
-    count-=.2;
+    p.translate(p.windowWidth*.9/2,p.windowHeight*.9/2);
+    count-=twistSpeed;
 
     for(var i =0; i<triangles.length-2; i++) //draw resize and rotate
     { 
@@ -64,7 +82,7 @@ import Tri from './Triangle.js';
      triangles[triangles.length-2].setSize(triangles.length);
      triangles[triangles.length-2].setColor(p.random(colorRange['minR'],colorRange['maxR']),p.random(colorRange['minG'],colorRange['maxG']),p.random(colorRange['minB'],colorRange['maxB']));
 
-     p.rotate(count*-1.5);
+     //p.rotate(count*-1.5);
     // p.background(100);
     // p.normalMaterial();
     // p.noStroke();
@@ -72,21 +90,6 @@ import Tri from './Triangle.js';
     // p.rotateY(rotation);
     // p.box(100);
     // p.pop();
-  };
-
-  p.mouseClicked = () => {
-    if(playing){
-      
-      p.noLoop();
-      playing = false;
-      p.textSize(32);
-      p.text('Click to resume!');
-    }
-    else{
-      p.loop();
-      playing = true;
-    }
-
   };
 
 

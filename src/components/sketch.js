@@ -4,8 +4,9 @@ import Tri from './Triangle.js';
  function sketch (p) {
   let playing = false;
   let triangles = [];
-  let listSize = 500;
+  let listSize = 500.0;
   let twistSpeed = 0;
+  let twistAmp = 0;
   let count =0;
   let opacity = 25;
   let rate = 1.0001;
@@ -44,8 +45,12 @@ import Tri from './Triangle.js';
     console.log(props.state);
 
     if(props.state.twistSpeed[0] !== twistSpeed){
-      twistSpeed = props.state.twistSpeed[0];
+      twistSpeed = props.state.twistSpeed[0]/10.0;
     }
+    if(props.state.twistAmp[0] !== twistAmp){
+      twistAmp = props.state.twistAmp;
+    }
+
     if(props.state.playing === false){
       console.log('paused');
       p.noLoop();
@@ -64,15 +69,15 @@ import Tri from './Triangle.js';
     p.clear();
     p.background(255);
     p.translate(p.windowWidth*.9/2,p.windowHeight*.9/2);
-    count-=twistSpeed;
+
     count-=twistSpeed;
 
 
-    for(var i =0; i<triangles.length-2; i++) //draw resize and rotate
+    for(var i =0.0; i<triangles.length-2; i++) //draw resize and rotate
     { 
       triangles[i].drawTriangle();
       triangles[i].setSize(i);
-      p.rotate((i/1500)+(count/1500));
+      p.rotate(  (i/(listSize*twistAmp)) + (count/1500.0) );
   
     }
    

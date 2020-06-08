@@ -3,6 +3,11 @@
 
 }
 
+input {
+  margin: .4rem;
+}
+
+
 .App {
   text-align: center;
 }

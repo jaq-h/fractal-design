@@ -15,6 +15,7 @@ class App extends Component {
     this.state = {
     
      twistSpeed: [0],
+     twistAmp: 0,
      
      playing: false
     }
@@ -24,14 +25,13 @@ class App extends Component {
 
 
   }
-   updateValue = (event, value) => {
-    if(event.target.parentNode.id){
-      console.log(event.target.parentNode.id,value);
+   updateValue = (event) => {
+      console.log(event.target);
 
-     this.setState({ [event.target.parentNode.id]:value  });
+      this.setState({ [event.target.id]:event.target.value });
  
 
-    }
+    
      
   }
 

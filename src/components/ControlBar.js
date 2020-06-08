@@ -9,16 +9,7 @@ class ControlBar extends Component {
     console.log(props);
   }
 
-   marks = [
-    {
-      value: -10,
-      label: '-10',
-    },
-    {
-      value: 10,
-      label: '10',
-    },
-  ];
+ 
 
    makeStyles = {
     root: {
@@ -27,6 +18,7 @@ class ControlBar extends Component {
   };
 
   handleUpdate = (event, value) => {
+      console.log(event,value);
       console.log('handleupdate');
       console.log(this.props);
       this.props.setValue(event,value);
@@ -53,20 +45,22 @@ class ControlBar extends Component {
     return(
       <div  className="Control-Bar">
         {icons}
+        {/* <hr style={{padding:'10px'}}/> */}
         <div>
-            <Slider
-                className='twistSpeed'
-                id='twistSpeed'
-                min={-10}
-                max={10}
-                defaultValue={[0]}
-                step={.1}
-                valueLabelDisplay="auto"
-                aria-labelledby="slider"
-                marks={this.marks}
-                onChangeCommitted={this.handleUpdate}
-            ></Slider>
-    
+            <label htmlFor="slider">
+                Twist Effect
+                <input
+                    id="twistAmp"
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={.001}
+                    defaultvalue={0}
+                    onChange={event => this.props.setValue(event)}
+                />
+               
+            </label>
+            
 
         </div>
         
@@ -82,3 +76,29 @@ export default ControlBar;
 // onChange={this.props.updateSpeed()}
 
 // onChange={handleChange}
+
+/* <Slider
+            style={this.makeStyles}
+                className='slider'
+                id='twistSpeed'
+                min={-10}
+                max={10}
+                defaultValue={[0]}
+                step={1}
+                valueLabelDisplay="auto"
+                aria-labelledby="slider"
+                onChange={this.handleUpdate}
+            ></Slider>
+            <Slider
+                        style={this.makeStyles}
+
+                className='slider'
+                id='twistAmp'
+                min={0}
+                max={10}
+                defaultValue={[0]}
+                step={1}
+                valueLabelDisplay="auto"
+                aria-labelledby="continuous-slider"
+                onChange={this.handleUpdate}
+            ></Slider> */

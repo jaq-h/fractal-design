@@ -26,6 +26,13 @@ class ControlBar extends Component {
     },
   };
 
+  handleUpdate = (event, value) => {
+      console.log('handleupdate');
+      console.log(this.props);
+      this.props.setValue(event,value);
+    
+  }
+
   
 
 
@@ -40,21 +47,31 @@ class ControlBar extends Component {
 
       }
 
+     
     
     
     return(
       <div  className="Control-Bar">
-        <Slider
-            min={-10}
-            max={10}
-            defaultValue={[0]}
-            step={.1}
-            valueLabelDisplay="auto"
-            aria-labelledby="slider"
-            marks={this.marks}
-        />
-          
         {icons}
+        <div>
+            <Slider
+                className='twistSpeed'
+                id='twistSpeed'
+                min={-10}
+                max={10}
+                defaultValue={[0]}
+                step={.1}
+                valueLabelDisplay="auto"
+                aria-labelledby="slider"
+                marks={this.marks}
+                onChangeCommitted={this.handleUpdate}
+            ></Slider>
+    
+
+        </div>
+        
+          
+        
         
       </div>
     );

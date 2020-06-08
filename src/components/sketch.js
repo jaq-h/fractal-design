@@ -41,17 +41,18 @@ import Tri from './Triangle.js';
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
-    // if (props.values){
-    //   twistSpeed = props.values.twistSpeed;
-    //   console.log(props.values);
-    // }
-    if(props.playing === false){
+    console.log(props.state);
+
+    if(props.state.twistSpeed[0] !== twistSpeed){
+      twistSpeed = props.state.twistSpeed[0];
+    }
+    if(props.state.playing === false){
       console.log('paused');
       p.noLoop();
       // p.textSize(32);
       //p.text('Click to resume!');
     }
-    else if (props.playing === true){
+    else if (props.state.playing === true){
       p.loop();
       // p.draw();
       console.log('playing');
@@ -59,11 +60,13 @@ import Tri from './Triangle.js';
     }
    };
 
-  p.draw = () => {
+    p.draw = () => {
     p.clear();
     p.background(255);
     p.translate(p.windowWidth*.9/2,p.windowHeight*.9/2);
     count-=twistSpeed;
+    count-=twistSpeed;
+
 
     for(var i =0; i<triangles.length-2; i++) //draw resize and rotate
     { 

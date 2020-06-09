@@ -48,18 +48,59 @@ class ControlBar extends Component {
         {/* <hr style={{padding:'10px'}}/> */}
         <div>
             <label htmlFor="slider">
-                Twist Effect
+                Twist angle
                 <input
-                    id="twistAmp"
+                    id="twistAngle"
                     type="range"
-                    min={0}
-                    max={1}
+                    min={-1000}
+                    max={1000}
+                    step={1}
+                    defaultvalue={0}
+                    value={+this.props.state.twistAngle}
+                    
+                />
+               
+            </label>
+            <span> <p> {this.props.state.twistAngle}</p></span>
+            
+
+        </div>
+
+        <div>
+            <label htmlFor="slider">
+                Twist Speed
+                <input
+                    id="twistSpeed"
+                    type="range"
+                    min={-10}
+                    max={10}
                     step={.001}
                     defaultvalue={0}
+                    value={this.props.state.twistSpeed}
                     onChange={event => this.props.setValue(event)}
                 />
                
             </label>
+            <span> <p> {this.props.state.twistSpeed}</p></span>
+            
+
+        </div>
+        <div>
+            <label htmlFor="slider">
+                Twist Amp
+                <input
+                    id="twistAmp"
+                    type="range"
+                    min={-1000}
+                    max={1000}
+                    step={.001}
+                    defaultvalue={0}
+                    value={this.props.state.twistAmp}
+                    onChange={event => this.props.setValue(event)}
+                />
+               
+            </label>
+            <span> <p> {this.props.state.twistAmp}</p></span>
             
 
         </div>

@@ -6,7 +6,15 @@
 input {
   margin: .4rem;
 }
+.sketch{
+  /* position: fixed; */
+}
+.Control-Bar{
+  z-index: 2;
+  background-color: #282c34;
+  position: fixed;
 
+}
 
 .App {
   text-align: center;

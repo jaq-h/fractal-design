@@ -58,15 +58,17 @@ import Tri from './Triangle.js';
     if(props.state.playing === false){
       console.log('paused');
       p.noLoop();
+
       // p.textSize(32);
       //p.text('Click to resume!');
     }
     else if (props.state.playing === true){
       p.loop();
-      // p.draw();
       console.log('playing');
     
     }
+    p.resizeCanvas(p.windowWidth, p.windowHeight);
+
    };
 
    p.draw = () => {
@@ -74,11 +76,11 @@ import Tri from './Triangle.js';
       p.background(255);
       p.translate(p.windowWidth/2,p.windowHeight/2);
       
-      count-=twistSpeed;
+      count+=twistSpeed;
       twistAngle = count + twistAmp;
 
-
-      for(var i =0.0; i<triangles.length-2; i++) //draw resize and rotate
+      //draw resize and rotate
+      for(var i =0.0; i<triangles.length-2; i++)
       { 
         triangles[i].drawTriangle();
         triangles[i].setSize(i);

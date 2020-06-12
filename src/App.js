@@ -13,9 +13,11 @@ class App extends Component {
 
 
     this.state = {
-      values:{
-        twistSpeed: 0
-     },
+    
+     twistSpeed: 0,
+     twistAmp: 0,
+     twistAngle:0,
+     
      playing: false
     }
 
@@ -24,9 +26,14 @@ class App extends Component {
 
 
   }
-   updateSpeed = (value) => {
-     this.setState({values: {twistSpeed:value}})
+   updateValue = (event) => {
+      console.log(event.target);
 
+      this.setState({ [event.target.id]:+event.target.value });
+ 
+
+    
+     
   }
 
   play = () => {
@@ -43,8 +50,8 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <P5Wrapper sketch={sketch} attributes={this.state.values} playing={this.state.playing} />
-        <ControlBar state={this.state}  play={this.play}  pause={this.pause} />
+        <ControlBar state={this.state}  setValue={this.updateValue} play={this.play}  pause={this.pause} />
+        <P5Wrapper sketch={sketch} state={this.state} className="sketch"  />
 
       </div>
     );

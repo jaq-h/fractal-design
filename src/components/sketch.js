@@ -4,9 +4,11 @@ import Tri from './Triangle.js';
  function sketch (p) {
   let playing = false;
   let triangles = [];
-  let listSize = 500;
+  let listSize = 500.0;
   let twistSpeed = 0;
-  let count =0;
+  let twistAmp = 0;
+  let twistAngle = 0;
+  let count =0; // replace by twistAnle^
   let opacity = 25;
   let rate = 1.0001;
   let colorRange = {
@@ -21,7 +23,7 @@ import Tri from './Triangle.js';
   p.setup = ()  => {
     
     console.log('setup');
-   p.createCanvas(p.windowWidth*.9,p.windowHeight*.9);
+   p.createCanvas(p.windowWidth,p.windowHeight);
    p.frameRate(60);
    p.colorMode(p.RGB, 255)
    for(var i = 0; i< listSize-1; i++)
@@ -37,59 +39,72 @@ import Tri from './Triangle.js';
   };
 
   p.windowResized = () =>  {
-    p.resizeCanvas(p.windowWidth*.9, p.windowHeight*.9);
+    p.resizeCanvas(p.windowWidth, p.windowHeight);
   }
 
   p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
-    if (props.values){
-      twistSpeed = props.values.twistSpeed;
-      console.log(props.values);
+    console.log(props.state);
+
+    if(props.state.twistSpeed !== twistSpeed){
+      twistSpeed = props.state.twistSpeed/10.0;
     }
-    if(!props.playing){
+    if(props.state.twistAmp !== twistAmp){
+      twistAmp = props.state.twistAmp;
+    }
+    if(props.state.twistAmp !== twistAngle){
+      twistAngle = props.state.twistAngle;
+    }
+
+    if(props.state.playing === false){
       console.log('paused');
       p.noLoop();
+
       // p.textSize(32);
       //p.text('Click to resume!');
     }
-    else{
+    else if (props.state.playing === true){
       p.loop();
-      p.draw();
       console.log('playing');
     
     }
+    p.resizeCanvas(p.windowWidth, p.windowHeight);
+
    };
 
-  p.draw = () => {
-    p.clear();
-    p.background(255);
-    p.translate(p.windowWidth*.9/2,p.windowHeight*.9/2);
-    count-=twistSpeed;
+   p.draw = () => {
+      p.clear();
+      p.background(255);
+      p.translate(p.windowWidth/2,p.windowHeight/2);
+      
+      count+=twistSpeed;
+      twistAngle = count + twistAmp;
 
-    for(var i =0; i<triangles.length-2; i++) //draw resize and rotate
-    { 
-      triangles[i].drawTriangle();
-      triangles[i].setSize(i);
-      p.rotate((i/1500)+(count/1500));
-  
-    }
-   
-     for(var j=0; j<triangles.length-2; j++) //shift array 
-     {
-        triangles[j] = triangles[j+1];   
-     }
+      //draw resize and rotate
+      for(var i =0.0; i<triangles.length-2; i++)
+      { 
+        triangles[i].drawTriangle();
+        triangles[i].setSize(i);
+        p.rotate(  i/(listSize*3) +  (twistAngle)/(listSize*3) );
+    
+      }
+    
+      for(var j=0; j<triangles.length-2; j++) //shift array 
+      {
+          triangles[j] = triangles[j+1];   
+      }
 
-     triangles[triangles.length-2] = new Tri(p);
-     triangles[triangles.length-2].setSize(triangles.length);
-     triangles[triangles.length-2].setColor(p.random(colorRange['minR'],colorRange['maxR']),p.random(colorRange['minG'],colorRange['maxG']),p.random(colorRange['minB'],colorRange['maxB']));
+      triangles[triangles.length-2] = new Tri(p);
+      triangles[triangles.length-2].setSize(triangles.length);
+      triangles[triangles.length-2].setColor(p.random(colorRange['minR'],colorRange['maxR']),p.random(colorRange['minG'],colorRange['maxG']),p.random(colorRange['minB'],colorRange['maxB']));
 
-     //p.rotate(count*-1.5);
-    // p.background(100);
-    // p.normalMaterial();
-    // p.noStroke();
-    // p.push();
-    // p.rotateY(rotation);
-    // p.box(100);
-    // p.pop();
+      //p.rotate(count*-1.5);
+      // p.background(100);
+      // p.normalMaterial();
+      // p.noStroke();
+      // p.push();
+      // p.rotateY(rotation);
+      // p.box(100);
+      // p.pop();
   };
 
 

@@ -36,6 +36,7 @@ class ControlBar extends Component {
    if(this.state.menu.length == 0 )
    {
     arr.push(
+      <>
       <label htmlFor="slider">
         Twist Amp
         <input
@@ -48,7 +49,11 @@ class ControlBar extends Component {
             // value={this.props.state.twistAmp}
             onChange={event => this.props.setValue(event)}
         />
-       </label>);
+       </label>
+       <span> <p> {this.props.state.twistAmp}</p></span>
+       </>
+       
+       );
 
    }
  

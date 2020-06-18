@@ -17,6 +17,9 @@ class App extends Component {
      twistSpeed: 0,
      twistAmp: 0,
      twistAngle:0,
+     twistRate:0,
+     spinRate:0,
+     spinAngle:0,
      
      playing: false
     }

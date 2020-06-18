@@ -36,22 +36,51 @@ class ControlBar extends Component {
    if(this.state.menu.length == 0 )
    {
     arr.push(
-      <>
-      <label htmlFor="slider">
-        Twist Amp
-        <input
-            id="twistAmp"
-            type="range"
-            min={-1000}
-            max={1000}
-            step={1}
-            defaultvalue={0}
-            // value={this.props.state.twistAmp}
-            onChange={event => this.props.setValue(event)}
-        />
-       </label>
-       <span> <p> {this.props.state.twistAmp}</p></span>
-       </>
+       <>
+         <li>
+        <label htmlFor="slider">
+         Twist Rate
+         <input
+             id="twistRate"
+             type="range"
+             min={-1}
+             max={1}
+             step={.01}
+            defaultValue={0}
+             onChange={event => this.props.setValue(event)}
+         />
+        </label>
+        </li>
+         <li>
+         <label htmlFor="slider">
+           Twist Offset
+           <input
+               id="twistAmp"
+               type="range"
+               min={-1000}
+               max={1000}
+               step={1}
+               defaultValue={0}
+               onChange={event => this.props.setValue(event)}
+           />
+          </label>
+         </li>
+         <li>
+          <label htmlFor="slider">
+          Spin Rate
+          <input
+              id="spinRate"
+              type="range"
+              min={-0.1}
+              max={.1}
+              step={.001}
+              defaultValue={0}
+              onChange={event => this.props.setValue(event)}
+          />
+         </label>
+         </li>
+
+         </>
        
        );
 
@@ -88,7 +117,7 @@ class ControlBar extends Component {
         </div>
         {/* <hr style={{padding:'10px'}}/> */}
         <div className="menu">
-            {this.state.menu === [] ?  null : this.state.menu }
+            {this.state.menu.length === 0 ?  null : this.state.menu }
         </div>
         
        

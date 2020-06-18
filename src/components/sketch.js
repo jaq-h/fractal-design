@@ -8,7 +8,10 @@ import Tri from './Triangle.js';
   let twistSpeed = 0;
   let twistAmp = 0;
   let twistAngle = 0;
-  let count =0; // replace by twistAnle^
+  let twistRate = 0;
+  let spinAngle =0;
+  let spinRate = 0;
+  let count =0;
   let opacity = 25;
   let rate = 1.0001;
   let colorRange = {
@@ -51,13 +54,17 @@ import Tri from './Triangle.js';
     if(props.state.twistAmp !== twistAmp){
       twistAmp = props.state.twistAmp;
     }
-    if(props.state.twistAmp !== twistAngle){
-      twistAngle = props.state.twistAngle;
+    if(props.state.twistRate !== twistRate){
+      twistRate = props.state.twistRate;
     }
+    if(props.state.spinRate !== spinRate){
+    spinRate = props.state.spinRate;
+    } 
 
     if(props.state.playing === false){
       console.log('paused');
       p.noLoop();
+      p.resizeCanvas(p.windowWidth, p.windowHeight);
 
       // p.textSize(32);
       //p.text('Click to resume!');
@@ -67,7 +74,7 @@ import Tri from './Triangle.js';
       console.log('playing');
     
     }
-    p.resizeCanvas(p.windowWidth, p.windowHeight);
+    
 
    };
 
@@ -78,13 +85,14 @@ import Tri from './Triangle.js';
       
       count+=twistSpeed;
       twistAngle = count + twistAmp;
-
+      spinAngle += spinRate;
+      p.rotate(spinAngle);
       //draw resize and rotate
       for(var i =0.0; i<triangles.length-2; i++)
       { 
         triangles[i].drawTriangle();
         triangles[i].setSize(i);
-        p.rotate(  i/(listSize*3) +  (twistAngle)/(listSize*3) );
+        p.rotate(  (twistRate)*i/(listSize*3) +  (twistAngle)/(listSize*3) );
     
       }
     

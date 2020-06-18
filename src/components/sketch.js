@@ -2,7 +2,6 @@ import Tri from './Triangle.js';
 
 
  function sketch (p) {
-  let playing = false;
   let triangles = [];
   let listSize = 500.0;
   let twistSpeed = 0;
@@ -13,7 +12,6 @@ import Tri from './Triangle.js';
   let spinRate = 0;
   let count =0;
   let opacity = 25;
-  let rate = 1.0001;
   let colorRange = {
     minR:0,
     maxR:255,
@@ -38,7 +36,7 @@ import Tri from './Triangle.js';
      
    }
   //  p.noLoop();
-  //  alert("Warning this animation contains flashing colors which may not be suitable for photosensitive epilepsy. Click the animation to play/pause");
+    alert("Warning this animation contains flashing colors which may not be suitable for photosensitive epilepsy.");
   };
 
   p.windowResized = () =>  {

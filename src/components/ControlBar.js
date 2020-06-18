@@ -33,8 +33,6 @@ class ControlBar extends Component {
 
   toggleEffectMenu = () =>{
     let arr = [];
-   if(this.state.menu.length == 0 )
-   {
     arr.push(
        <>
          <li>
@@ -83,10 +81,31 @@ class ControlBar extends Component {
          </>
        
        );
+    this.setState({ menu:arr});
+    
+  }
 
-   }
- 
-
+  toggleColorMenu = () =>{
+    let arr = [];
+    arr.push(
+       <>
+         <li>
+        <label htmlFor="slider">
+         Red
+         <input
+             id="twistRate"
+             type="range"
+             min={-1}
+             max={1}
+             step={.01}
+            defaultValue={0}
+             onChange={event => this.props.setValue(event)}
+         />
+        </label>
+        </li>
+         </>
+       
+       );
     this.setState({ menu:arr});
     
   }
@@ -105,7 +124,7 @@ class ControlBar extends Component {
        icons.push( <Icon onClick={this.props.play} title='Play' color='purple' size='big' name='play'/>);
       }
 
-      icons.push( <Icon onClick={this.toggleEffectMenu} title='Effects' name='sliders horizontal icon' size='big' color='blue'/>);
+      icons.push( <Icon onClick={this.toggleEffectMenu} title='Effects' name='magic icon' size='big' color='blue'/>);
       
      
     

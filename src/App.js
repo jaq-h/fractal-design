@@ -20,8 +20,11 @@ class App extends Component {
      twistRate:0,
      spinRate:0,
      spinAngle:0,
-     
-     playing: false
+     redRange:[0,255],
+     greenRange:[0,255],
+     blueRange:[0,255],
+     opacity:50,
+     playing: false,
     }
 
     // this.togglePlay = this.togglePlay.bind(this);
@@ -29,14 +32,15 @@ class App extends Component {
 
 
   }
-   updateValue = (event) => {
-      console.log(event.target);
+   updateValue = (attr,value) => {
+      console.log(attr,value);
 
-      this.setState({ [event.target.id]:+event.target.value });
- 
+      this.setState({ [attr]:value });
+  }
 
-    
-     
+  updateColor = (color, range) => {
+    console.log(color,range)
+    this.setState({ [color+'Range']:range});
   }
 
   play = () => {
@@ -53,7 +57,7 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <ControlBar state={this.state}  setValue={this.updateValue} play={this.play}  pause={this.pause} />
+        <ControlBar state={this.state}  setValue={this.updateValue} setColor={this.updateColor}play={this.play}  pause={this.pause} />
         <P5Wrapper sketch={sketch} state={this.state} className="sketch"  />
 
       </div>

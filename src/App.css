@@ -3,7 +3,13 @@
 
 }
 
+.MuiSlider-root{
+  width: 80%;
+}
 
+.colorSlider{
+  width: 80%;
+}
 .sketch{
   /* position: fixed; */
 }

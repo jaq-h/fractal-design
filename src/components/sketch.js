@@ -3,7 +3,7 @@ import Tri from './Triangle.js';
 
  function sketch (p) {
   let triangles = [];
-  let listSize = 500.0;
+  let listSize = 300.0;
   let twistSpeed = 0;
   let twistAmp = 0;
   let twistAngle = 0;
@@ -12,14 +12,9 @@ import Tri from './Triangle.js';
   let spinRate = 0;
   let count =0;
   let opacity = 25;
-  let colorRange = {
-    minR:0,
-    maxR:255,
-    minG:0,
-    maxG:255,
-    minB:0,
-    maxB:255,
-  };
+  let redRange = [0,255];
+  let greenRange = [0,255];
+  let blueRange = [0,255];
 
   p.setup = ()  => {
     
@@ -31,7 +26,7 @@ import Tri from './Triangle.js';
    {
      let temp = new Tri(p);
      temp.setSize(i);
-     temp.setColor(p.random(colorRange['minR'],colorRange['maxR']),p.random(colorRange['minG'],colorRange['maxG']),p.random(colorRange['minB'],colorRange['maxB']));
+     temp.setColor(p.random(redRange[0],redRange[1]),p.random(greenRange[0],greenRange[1]),p.random(blueRange[0],blueRange[1]));
      triangles.push(temp);
      
    }
@@ -46,18 +41,19 @@ import Tri from './Triangle.js';
   p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
     console.log(props.state);
 
-    if(props.state.twistSpeed !== twistSpeed){
       twistSpeed = props.state.twistSpeed/10.0;
-    }
-    if(props.state.twistAmp !== twistAmp){
+ 
       twistAmp = props.state.twistAmp;
-    }
-    if(props.state.twistRate !== twistRate){
+    
+  
       twistRate = props.state.twistRate;
-    }
-    if(props.state.spinRate !== spinRate){
+    
     spinRate = props.state.spinRate;
-    } 
+  
+    redRange = props.state.redRange;
+    greenRange = props.state.greenRange;
+
+   opacity = props.state.opacity;
 
     if(props.state.playing === false){
       console.log('paused');
@@ -90,7 +86,7 @@ import Tri from './Triangle.js';
       { 
         triangles[i].drawTriangle();
         triangles[i].setSize(i);
-        p.rotate(  (twistRate)*i/(listSize*3) +  (twistAngle)/(listSize*3) );
+        p.rotate(  (twistRate)*i/(1500) +  (twistAngle)/(1500) );
     
       }
     
@@ -101,7 +97,7 @@ import Tri from './Triangle.js';
 
       triangles[triangles.length-2] = new Tri(p);
       triangles[triangles.length-2].setSize(triangles.length);
-      triangles[triangles.length-2].setColor(p.random(colorRange['minR'],colorRange['maxR']),p.random(colorRange['minG'],colorRange['maxG']),p.random(colorRange['minB'],colorRange['maxB']));
+      triangles[triangles.length-2].setColor(p.random(redRange[0],redRange[1]),p.random(greenRange[0],greenRange[1]),p.random(blueRange[0],blueRange[1]),opacity);
 
       //p.rotate(count*-1.5);
       // p.background(100);

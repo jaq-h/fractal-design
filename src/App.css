@@ -1,10 +1,11 @@
 *{
-  background-color: #282c34;
+  background-color: rgb(40, 44, 52);
 
 }
 
 .MuiSlider-root{
   width: 80%;
+  color: rgb(127, 162, 211);
 }
 
 .colorSlider{

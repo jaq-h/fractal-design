@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Slider from '@material-ui/core/Slider';
-import {  Icon } from 'semantic-ui-react'
+import {  Label, Icon } from 'semantic-ui-react'
 // import Framework7 from 'framework7';
 // import { Range } from 'framework7-react'
 import 'semantic-ui-css/semantic.min.css';
@@ -10,7 +10,7 @@ class ControlBar extends Component {
     super(props);
     console.log(props);
     this.state = {
-      menu:[],
+      menu:'',
 
 
     };
@@ -31,121 +31,157 @@ class ControlBar extends Component {
       //console.log(this.props);
       this.props.setColor(color,values);
   }
+  toggleEffectMenu = () => {
+    this.setState({menu:'effect'});
+  }
+  toggleColorMenu = () => {
+    this.setState({menu:'color'});
+  }
+   
 
-  toggleEffectMenu = () =>{
-    let arr = [];
-    arr.push(
-       <>
+  effectMenu(){
+    const effectSliders = <>
+        
          <li>
-        <label htmlFor="slider">
-         Twist Rate
-         <input
+         <Label  className='ui label' >
+             Twist
+          </Label>
+           <Slider
               style={{width:'80%'}}
              id="twistRate"
-             type="range"
+        
              min={-1}
              max={1}
              step={.01}
-            defaultValue={0}
-             onChange={(event) => this.props.setValue('twistRate',+event.target.value)}
-         />
-        </label>
-        </li>
+            defaultValue={this.props.state.twistRate}
+            aria-labelledby="continuous-slider"
+            valueLabelDisplay="auto"
+             onChange={(event, value) => this.props.setValue('twistRate',value)}
+             ></Slider>
+      
+      </li>
          <li>
-         <label htmlFor="slider">
-           Twist Offset
-           </label>
-           <input
-            style={{width:'80%'}}
+         <Label  className='ui label' >
+             Spiral
+          </Label>
+           <Slider
+               style={{width:'80%'}}
                id="twistAmp"
-               type="range"
                min={-1000}
                max={1000}
                step={1}
-               defaultValue={0}
-               onChange={(event) => this.props.setValue('twistAmp',+event.target.value)}
-           />
-          
-         </li>
-         <li>
-          <label htmlFor="slider">
-          Spin Rate
-          <input
-           style={{width:'80%'}}
-              id="spinRate"
-              type="range"
-              min={-0.1}
-              max={.1}
-              step={.001}
-              defaultValue={0}
-              onChange={(event) => this.props.setValue('spinRate',+event.target.value)}
-          />
-         </label>
-         </li>
+               defaultValue={this.props.state.twistAmp}
+                aria-labelledby="continuous-slider"
+                valueLabelDisplay="auto"
+                onChange={(event, value) => this.props.setValue('twistAmp',value)}
 
-         </>
-       
-       );
-    this.setState({ menu:arr});
+            ></Slider>
+          
+           
+         
+          </li>
+         <li>
+        
+         <Label  className='ui label' >
+             Spin
+          </Label>
+            <Slider
+                style={{width:'80%'}}
+                id="spinRate"
+                min={-0.1}
+                max={.1}
+                step={.001}
+                defaultValue={this.props.state.spinRate}
+                aria-labelledby="continuous-slider"
+                valueLabelDisplay="auto"
+                onChange={(event, value) => this.props.setValue('spinRate',value)}
+
+            ></Slider>
+            </li>
+    </>
+    return effectSliders;
     
   }
 
-  toggleColorMenu = () =>{
-    let arr = [];
-    arr.push(
-       <>
+  colorMenu()
+  {
+    const colorSliders = 
+       
+         <>
+          <li>
+        <Label  className='ui label' >
+             Red
+          </Label>
           <Slider
                style={{width:'80%'}}
                 className='colorSlider'
                 id='redRange'
                 min={0}
                 max={255}
-                defaultValue={[0,255]}
+                defaultValue={this.props.state.redRange}
+                // value = {}
                 step={1}
                 // valueLabelDisplay="auto"
                 aria-labelledby="ranges-slider"
                 onChange={(event, value) => this.handleRangeUpdate('red', value)}
           ></Slider>
+         </li>
+         <li>
+
+           <Label  className='ui label' >
+            Green 
+          </Label>
           <Slider
                style={{width:'80%'}}
                 className='colorSlider'
                 id='greenRange'
                 min={0}
                 max={255}
-                defaultValue={[0,255]}
+                defaultValue={this.props.state.greenRange}
                 step={1}
                 // valueLabelDisplay="auto"
                 aria-labelledby="ranges-slider"
                 onChange={(event, value) => this.handleRangeUpdate('green', value)}
           ></Slider>
+          </li>
+         <li>
+           <Label  className='ui label' >
+             Blue
+          </Label>
           <Slider
                style={{width:'80%'}}
                 className='colorSlider'
                 id='blueRange'
                 min={0}
                 max={255}
-                defaultValue={[0,255]}
+                defaultValue={this.props.state.blueRange}
                 step={1}
                 // valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
                 onChange={(event, value) => this.handleRangeUpdate('blue', value)}
           ></Slider>
+          </li>
+         <li>
+           <Label  className='ui label' >
+             Opacity
+          </Label>
           <Slider
                style={{width:'80%'}}
                 className='colorSlider'
                 id='opacity'
                 min={0}
                 max={255}
-                defaultValue={50}
+                defaultValue={this.props.state.opacity}
                 step={1}
                 // valueLabelDisplay="auto"
                 aria-labelledby="continuous-slider"
                 onChange={(event, value) => this.props.setValue('opacity', value)}
           ></Slider>
-         </>
-       
-       );
-    this.setState({ menu:arr});
+          </li>
+    </>
+         
+      
+    return colorSliders;
     
   }
 
@@ -167,7 +203,17 @@ class ControlBar extends Component {
       }
 
       icons.push( <Icon onClick={this.toggleEffectMenu} title='Effects' name='magic icon' size='big' color='blue'/>);
-      
+
+    const sliders = [];
+
+      if(this.state.menu === 'effect')
+      {
+        sliders.push(this.effectMenu());
+      }
+      else
+      {
+        sliders.push(this.colorMenu());
+      }
      
     
     
@@ -177,7 +223,7 @@ class ControlBar extends Component {
           {icons}
         </div>
         <div className="menu">
-            {this.state.menu.length === 0 ?  null : this.state.menu }
+            {sliders}
         </div>
         
        
@@ -192,82 +238,3 @@ class ControlBar extends Component {
 }
 
 export default ControlBar;
-// onChange={this.props.updateSpeed()}
-
-// onChange={handleChange}
-
-{/* f7 <Range
-              min={0}
-              max={255}
-              step={1}
-              label={true}
-              dual={true}
-              color="green"
-              // onRangeChange={this.onPriceChange.bind(this)}
-         ></Range> */}
-
-/* <Slider
-
- <div>
-            <label htmlFor="slider">
-                Twist Speed
-                <input
-                    id="twistSpeed"
-                    type="range"
-                    min={-10}
-                    max={10}
-                    step={.001}
-                    defaultvalue={0}
-                    value={this.props.state.twistSpeed}
-                    onChange={event => this.props.setValue(event)}
-                />
-               
-            </label>
-            <span> <p> {this.props.state.twistSpeed}</p></span>
-            
-
-        </div>
-            style={this.makeStyles}
-                className='slider'
-                id='twistSpeed'
-                min={-10}
-                max={10}
-                defaultValue={[0]}
-                step={1}
-                valueLabelDisplay="auto"
-                aria-labelledby="slider"
-                onChange={this.handleUpdate}
-            ></Slider>
-            <Slider
-                        style={this.makeStyles}
-
-                className='slider'
-                id='twistAmp'
-                min={0}
-                max={10}
-                defaultValue={[0]}
-                step={1}
-                valueLabelDisplay="auto"
-                aria-labelledby="continuous-slider"
-                onChange={this.handleUpdate}
-            ></Slider> */
-
-        //     <div>
-        //     <label htmlFor="slider">
-        //         Twist angle
-        //         <input
-        //             id="twistAngle"
-        //             type="range"
-        //             min={-1000}
-        //             max={1000}
-        //             step={1}
-        //             defaultvalue={0}
-        //             value={+this.props.state.twistAngle}
-                    
-        //         />
-               
-        //     </label>
-        //     <span> <p> {this.props.state.twistAngle}</p></span>
-            
-
-        // </div>

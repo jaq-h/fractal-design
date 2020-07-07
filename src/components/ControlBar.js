@@ -41,7 +41,7 @@ class ControlBar extends Component {
 
   effectMenu(){
     const effectSliders = <>
-        
+      
          <li>
          <Label  className='ui label' >
              Twist
@@ -98,6 +98,7 @@ class ControlBar extends Component {
 
             ></Slider>
             </li>
+         
     </>
     return effectSliders;
     
@@ -105,9 +106,8 @@ class ControlBar extends Component {
 
   colorMenu()
   {
-    const colorSliders = 
-       
-         <>
+    const colorSliders = <>
+         <ul>
           <li>
         <Label  className='ui label' >
              Red
@@ -178,6 +178,7 @@ class ControlBar extends Component {
                 onChange={(event, value) => this.props.setValue('opacity', value)}
           ></Slider>
           </li>
+        </ul>
     </>
          
       
@@ -204,15 +205,15 @@ class ControlBar extends Component {
 
       icons.push( <Icon onClick={this.toggleEffectMenu} title='Effects' name='magic icon' size='big' color='blue'/>);
 
-    const sliders = [];
+    let sliders = null;
 
       if(this.state.menu === 'effect')
       {
-        sliders.push(this.effectMenu());
+        sliders = this.effectMenu();
       }
       else
       {
-        sliders.push(this.colorMenu());
+        sliders = this.colorMenu();
       }
      
     

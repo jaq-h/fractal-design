@@ -8,6 +8,11 @@
   color: rgb(127, 162, 211);
 }
 
+.desc{
+  font-size: x-large;
+  color:lightsteelblue;
+}
+
 .colorSlider{
   width: 80%;
 }

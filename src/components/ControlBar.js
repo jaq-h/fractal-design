@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Slider from '@material-ui/core/Slider';
+// import Tooltip from '@material-ui/core/Tooltip';
 import {  Label, Icon } from 'semantic-ui-react'
 // import Framework7 from 'framework7';
 // import { Range } from 'framework7-react'
@@ -41,7 +42,7 @@ class ControlBar extends Component {
 
   effectMenu(){
     const effectSliders = <>
-      
+        <span className='desc'> Adjust motion effects:</span>
          <li>
          <Label  className='ui label' >
              Twist
@@ -107,6 +108,7 @@ class ControlBar extends Component {
   colorMenu()
   {
     const colorSliders = <>
+    <span className='desc'>Color Range:</span>
          <ul>
           <li>
         <Label  className='ui label' >
@@ -121,7 +123,7 @@ class ControlBar extends Component {
                 defaultValue={this.props.state.redRange}
                 // value = {}
                 step={1}
-                // valueLabelDisplay="auto"
+                valueLabelDisplay="auto"
                 aria-labelledby="ranges-slider"
                 onChange={(event, value) => this.handleRangeUpdate('red', value)}
           ></Slider>
@@ -139,7 +141,7 @@ class ControlBar extends Component {
                 max={255}
                 defaultValue={this.props.state.greenRange}
                 step={1}
-                // valueLabelDisplay="auto"
+                valueLabelDisplay="auto"
                 aria-labelledby="ranges-slider"
                 onChange={(event, value) => this.handleRangeUpdate('green', value)}
           ></Slider>
@@ -156,7 +158,7 @@ class ControlBar extends Component {
                 max={255}
                 defaultValue={this.props.state.blueRange}
                 step={1}
-                // valueLabelDisplay="auto"
+                valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
                 onChange={(event, value) => this.handleRangeUpdate('blue', value)}
           ></Slider>
@@ -173,7 +175,7 @@ class ControlBar extends Component {
                 max={255}
                 defaultValue={this.props.state.opacity}
                 step={1}
-                // valueLabelDisplay="auto"
+                valueLabelDisplay="auto"
                 aria-labelledby="continuous-slider"
                 onChange={(event, value) => this.props.setValue('opacity', value)}
           ></Slider>
@@ -193,8 +195,8 @@ class ControlBar extends Component {
   render(){
       const icons = [];
       
-      icons.push( <Icon onClick={this.toggleColorMenu} title='Color' name='tint' size='big' color='blue'/>);
-
+      icons.push(<Icon onClick={this.toggleColorMenu} title='Color' name='tint' size='big' color='blue'/>);
+      
       if(this.props.state.playing){
        icons.push( <Icon onClick={this.props.pause} title='Pause' color='purple' size='big' name='pause'/>);
        

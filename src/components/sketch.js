@@ -31,7 +31,7 @@ import Tri from './Triangle.js';
      
    }
   //  p.noLoop();
-    // alert("Warning this animation contains flashing colors which may not be suitable for photosensitive epilepsy.");
+    alert("Warning this animation contains flashing colors which may not be suitable for photosensitive epilepsy.");
   };
 
   p.windowResized = () =>  {

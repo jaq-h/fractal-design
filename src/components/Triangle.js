@@ -12,12 +12,13 @@ class Tri {
       
     }
   
-    setColor(red,green,blue)
+    setColor(red,green,blue, opacity=25)
     {
  
         this.r= red;
         this.g= green; 
         this.b= blue; 
+        this.o= opacity;
     
     }
     setSize(i)
@@ -28,7 +29,7 @@ class Tri {
 
     drawTriangle()
     {
-      this.p.fill([this.r,this.g,this.b, 100]);
+      this.p.fill([this.r,this.g,this.b,this.o]);
       this.p.noStroke();
       let h = Math.sqrt(3)/2*this.w;
       this.p.triangle( (-1/2.0)*this.w,(-1/3.0)*h, (1/2.0)*this.w, (-1/3.0)*h, 0, (2/3.0)*h); 

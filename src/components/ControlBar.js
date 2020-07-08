@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Slider from '@material-ui/core/Slider';
 // import Tooltip from '@material-ui/core/Tooltip';
-import {  Label, Icon } from 'semantic-ui-react'
+import {  Button, Label, Icon } from 'semantic-ui-react'
 // import Framework7 from 'framework7';
 // import { Range } from 'framework7-react'
 import 'semantic-ui-css/semantic.min.css';
@@ -33,23 +33,37 @@ class ControlBar extends Component {
       this.props.setColor(color,values);
   }
   toggleEffectMenu = () => {
-    this.setState({menu:'effect'});
+    if(this.state.menu !== 'effect'){
+      this.setState({menu:'effect'});
+    }
+    else{
+      this.setState({menu:''});
+
+    }
   }
   toggleColorMenu = () => {
-    this.setState({menu:'color'});
+    if(this.state.menu !== 'color'){
+      this.setState({menu:'color'});    }
+    else{
+      this.setState({menu:''});
+    }
+    
+  }
+  hideMenu = () => {
+    this.setState({menu:''});
   }
    
 
   effectMenu(){
     const effectSliders = <>
-        <span className='desc'> Adjust motion effects:</span>
-         <li>
-         <Label  className='ui label' >
+        {/* <span className='desc'> Adjust motion effects:</span> */}
+         
+         <Label  style={{minWidth:'80%',marginTop:'10px', color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)', textAlign:'center'}} >
              Twist
-          </Label>
+          
            <Slider
-              style={{width:'80%'}}
-             id="twistRate"
+               style={{selfAlign:'right',marginTop:'5px',verticalAlign:'middle', color:'rgb(109, 149, 204)'}}
+               id="twistRate"
         
              min={-1}
              max={1}
@@ -59,14 +73,13 @@ class ControlBar extends Component {
             valueLabelDisplay="auto"
              onChange={(event, value) => this.props.setValue('twistRate',value)}
              ></Slider>
+        </Label>
       
-      </li>
-         <li>
-         <Label  className='ui label' >
+         <Label  style={{minWidth:'80%',marginTop:'10px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)', textAlign:'center'}} >
              Spiral
-          </Label>
+          
            <Slider
-               style={{width:'80%'}}
+               style={{selfAlign:'right',marginTop:'5px',verticalAlign:'middle', color:'rgb(109, 149, 204)'}}
                id="twistAmp"
                min={-1000}
                max={1000}
@@ -77,18 +90,17 @@ class ControlBar extends Component {
                 onChange={(event, value) => this.props.setValue('twistAmp',value)}
 
             ></Slider>
-          
+                  </Label>
+
            
          
-          </li>
-         <li>
-        
-         <Label  className='ui label' >
+         
+          <Label  style={{minWidth:'80%',marginTop:'10px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)', textAlign:'center'}} >
              Spin
-          </Label>
-            <Slider
-                style={{width:'80%'}}
-                id="spinRate"
+          
+           <Slider
+               style={{selfAlign:'right',marginTop:'5px',verticalAlign:'middle', color:'rgb(109, 149, 204)'}}
+               id="spinRate"
                 min={-0.1}
                 max={.1}
                 step={.001}
@@ -98,7 +110,12 @@ class ControlBar extends Component {
                 onChange={(event, value) => this.props.setValue('spinRate',value)}
 
             ></Slider>
-            </li>
+                    </Label>
+
+            <h4 className='hide'>
+            <Icon onClick={this.hideMenu} title='Hide' color='grey' size='big' name='angle up'/>
+            </h4>
+
          
     </>
     return effectSliders;
@@ -108,15 +125,14 @@ class ControlBar extends Component {
   colorMenu()
   {
     const colorSliders = <>
-    <span className='desc'>Color Range:</span>
-         <ul>
-          <li>
-        <Label  className='ui label' >
-             Red
-          </Label>
+    {/* <span className='desc'>Color Range:</span> */}
+         <div>
+         <Label  style={{minWidth:'80%',marginTop:'10px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)', textAlign:'center'}} >
+            Red
           <Slider
-               style={{width:'80%'}}
-                className='colorSlider'
+              title='Red'
+               style={{color:'whitesmoke', marginTop:'5px',backgroundImage:'linear-gradient(to right, rgb(0,0,0),rgb(255,0,0))'}}
+               className='colorSlider'
                 id='redRange'
                 min={0}
                 max={255}
@@ -127,15 +143,13 @@ class ControlBar extends Component {
                 aria-labelledby="ranges-slider"
                 onChange={(event, value) => this.handleRangeUpdate('red', value)}
           ></Slider>
-         </li>
-         <li>
-
-           <Label  className='ui label' >
-            Green 
-          </Label>
+         </Label>
+         <Label  style={{minWidth:'80%',marginTop:'10px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)', textAlign:'center'}} >
+            Green
           <Slider
-               style={{width:'80%'}}
-                className='colorSlider'
+              title='Green'
+               style={{color:'whitesmoke',marginTop:'5px', backgroundImage:'linear-gradient(to right, rgb(0,0,0),rgb(0,255,0))'}}
+               className='colorSlider'
                 id='greenRange'
                 min={0}
                 max={255}
@@ -145,14 +159,13 @@ class ControlBar extends Component {
                 aria-labelledby="ranges-slider"
                 onChange={(event, value) => this.handleRangeUpdate('green', value)}
           ></Slider>
-          </li>
-         <li>
-           <Label  className='ui label' >
-             Blue
           </Label>
+          <Label  style={{minWidth:'80%',marginTop:'10px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)', textAlign:'center'}} >
+          Blue
           <Slider
-               style={{width:'80%'}}
-                className='colorSlider'
+              title='Blue'
+               style={{color:'whitesmoke',marginTop:'5px', backgroundImage:'linear-gradient(to right, rgb(0,0,0),rgb(0,0,255))'}}
+               className='colorSlider'
                 id='blueRange'
                 min={0}
                 max={255}
@@ -162,14 +175,13 @@ class ControlBar extends Component {
                 aria-labelledby="range-slider"
                 onChange={(event, value) => this.handleRangeUpdate('blue', value)}
           ></Slider>
-          </li>
-         <li>
-           <Label  className='ui label' >
-             Opacity
           </Label>
+          <Label  style={{minWidth:'80%',marginTop:'10px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)', textAlign:'center'}} >
+          Opacity
           <Slider
-               style={{width:'80%'}}
-                className='colorSlider'
+                title='Opacity'
+               style={{color:'whitesmoke',marginTop:'5px', backgroundImage:'linear-gradient(to right, rgb(255,255,255),rgb(100,100,100),rgb(0,0,0))'}}
+               className='colorSlider'
                 id='opacity'
                 min={0}
                 max={255}
@@ -179,8 +191,10 @@ class ControlBar extends Component {
                 aria-labelledby="continuous-slider"
                 onChange={(event, value) => this.props.setValue('opacity', value)}
           ></Slider>
-          </li>
-        </ul>
+          </Label>
+          <h4 className='hide'>
+            <Icon onClick={this.hideMenu} title='Hide' color='grey' size='big' name='angle up'/>
+            </h4>        </div>
     </>
          
       
@@ -195,28 +209,69 @@ class ControlBar extends Component {
   render(){
       const icons = [];
       
-      icons.push(<Icon onClick={this.toggleColorMenu} title='Color' name='tint' size='big' color='blue'/>);
       
       if(this.props.state.playing){
-       icons.push( <Icon onClick={this.props.pause} title='Pause' color='purple' size='big' name='pause'/>);
+       icons.push( <Icon onClick={this.props.pause} title='Pause' color='purple' size='big' name='pause circle outline'/>);
        
       }
       else{
-       icons.push( <Icon onClick={this.props.play} title='Play' color='purple' size='big' name='play'/>);
+       icons.push( <Icon onClick={this.props.play} title='Play' color='purple' size='big' name='play circle outline'/>);
       }
 
-      icons.push( <Icon onClick={this.toggleEffectMenu} title='Effects' name='magic icon' size='big' color='blue'/>);
+     
 
     let sliders = null;
 
       if(this.state.menu === 'effect')
       {
         sliders = this.effectMenu();
+        icons.unshift( 
+          <Button className='nav-button' icon labelPosition='left' onClick={this.toggleColorMenu}
+          style={{margin:'5px', color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)'}}
+      >
+              <Icon name='tint' size='large' color='blue'/>Color
+          </Button>);
+        icons.push( 
+          <Button className='nav-button' icon labelPosition='left' onClick={this.toggleEffectMenu}
+          style={{margin:'5px',color:'rgb(109, 149, 204)',backgroundColor:'whitesmoke'}}
+      >
+              <Icon  name='magic icon' size='large' color='blue'/>Effects
+          </Button>);
       }
-      else
+      else if(this.state.menu === 'color')
       {
         sliders = this.colorMenu();
+        icons.unshift( 
+          <Button className='nav-button' icon labelPosition='left' onClick={this.toggleColorMenu}
+              style={{margin:'5px',color:'rgb(109, 149, 204)',backgroundColor:'whitesmoke'}}
+          >
+              <Icon name='tint' size='large' color='blue'/>Color
+          </Button>);
+        icons.push( 
+          <Button className='nav-button' icon labelPosition='left' onClick={this.toggleEffectMenu}
+          style={{margin:'5px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)'}}
+      >
+              <Icon  name='magic icon' size='large' color='blue'/>Effects
+          </Button>);
       }
+      else{
+        icons.unshift( 
+          <Button className='nav-button' icon labelPosition='left' onClick={this.toggleColorMenu}
+          style={{margin:'5px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)'}}
+      >
+              <Icon name='tint' size='large' color='blue'/>Color
+          </Button>);
+        icons.push( 
+          <Button className='nav-button' icon labelPosition='left' onClick={this.toggleEffectMenu}
+          style={{margin:'5px',color:'rgb(109, 149, 204)',backgroundColor:'rgba(255,255,255,0.1)'}}
+      >
+              <Icon  name='magic icon' size='large' color='blue'/>Effects
+          </Button>);
+
+      }
+  
+
+      
      
     
     
@@ -225,8 +280,8 @@ class ControlBar extends Component {
         <div className="icons">
           {icons}
         </div>
-        <div className="menu">
-            {sliders}
+        <div  >
+            { sliders}
         </div>
         
        

@@ -27,7 +27,7 @@ class Tri {
       
     }
 
-    drawTriangle(rMin=0,rMax=255,gMin=0,gMax=255,bMin=0,bMax=255)
+    drawTriangle(rMin=0,rMax=255,gMin=0,gMax=255,bMin=0,bMax=255,opacity=25)
     {
       if(this.r > rMax || this.r  < rMin)
       {
@@ -42,7 +42,7 @@ class Tri {
         this.b = Math.random() * (bMax - bMin + 1) + bMin;
       }
 
-      this.p.fill([this.r,this.g,this.b,this.o]);
+      this.p.fill([this.r,this.g,this.b,opacity]);
       this.p.noStroke();
       let h = Math.sqrt(3)/2*this.w;
       this.p.triangle( (-1/2.0)*this.w,(-1/3.0)*h, (1/2.0)*this.w, (-1/3.0)*h, 0, (2/3.0)*h); 

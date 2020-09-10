@@ -14,7 +14,7 @@ class Tri {
   
     setColor(red,green,blue, opacity=25)
     {
- 
+        
         this.r= red;
         this.g= green; 
         this.b= blue; 
@@ -27,8 +27,21 @@ class Tri {
       
     }
 
-    drawTriangle()
+    drawTriangle(rMin=0,rMax=255,gMin=0,gMax=255,bMin=0,bMax=255)
     {
+      if(this.r > rMax || this.r  < rMin)
+      {
+        this.r = Math.random() * (rMax - rMin + 1) + rMin;
+      }
+      if(this.g > gMax || this.g  < gMin)
+      {
+        this.g = Math.random() * (gMax - gMin + 1) + gMin;
+      }
+      if(this.b > bMax || this.b  < bMin)
+      {
+        this.b = Math.random() * (bMax - bMin + 1) + bMin;
+      }
+
       this.p.fill([this.r,this.g,this.b,this.o]);
       this.p.noStroke();
       let h = Math.sqrt(3)/2*this.w;

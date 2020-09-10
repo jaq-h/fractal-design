@@ -84,7 +84,7 @@ import Tri from './Triangle.js';
       //draw resize and rotate
       for(var i =0.0; i<triangles.length-2; i++)
       { 
-        triangles[i].drawTriangle();
+        triangles[i].drawTriangle(redRange[0],redRange[1],greenRange[0],greenRange[1],blueRange[0],blueRange[1]);
         triangles[i].setSize(i);
         p.rotate(  (twistRate)*i/(1500) +  (twistAngle)/(1500) );
     
